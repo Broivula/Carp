@@ -4,6 +4,7 @@ import { MediaProvider} from "../../providers/media/media";
 import 'rxjs/add/operator/toPromise'
 import { IMediaData } from "../../interfaces/interfaces";
 import { Observable } from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 /**
  * Generated class for the HomePage page.
@@ -19,14 +20,17 @@ import { Observable } from "rxjs";
 })
 export class HomePage {
 
-  listOfAllMedia : Observable<IMediaData[]>;
+  mediaArray : Observable<IMediaData[]>;
   apiUploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaProvider:MediaProvider) {
+  constructor(private mediaProvider:MediaProvider) {
   }
 
   getAllCarpMedia () {
-      this.listOfAllMedia = this.mediaProvider.getAllCarpMedia();
+      this.mediaProvider.getAllCarpMedia().subscribe( (res: IMediaData[]) => {
+        console.log(res);
+        this.mediaArray = res;
+      });
   }
 
   ionViewDidLoad() {

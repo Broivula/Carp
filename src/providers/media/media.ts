@@ -11,14 +11,14 @@ import {IMediaData} from "../../interfaces/interfaces";
 @Injectable()
 export class MediaProvider {
 
-  public apiUrl:string  = 'http://media.mw.metropolia.fi/wbma/';
+  private apiUrl:string  = 'http://media.mw.metropolia.fi/wbma';
 
   constructor(public http: HttpClient) {
 
   }
 
   getAllCarpMedia (){
-    return this.http.get<IMediaData[]>(this.apiUrl + 'media');
+    return this.http.get<IMediaData[]>(this.apiUrl + '/media');
   }
 
 }

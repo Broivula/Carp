@@ -16,7 +16,7 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let entry of listOfAllMedia">
+    <ion-item *ngFor="let entry of mediaArray">
       <ion-thumbnail slot="start">
         <img [src]="apiUploadUrl + entry.filename">
       </ion-thumbnail>
