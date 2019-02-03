@@ -20,18 +20,18 @@ import {HttpClient} from "@angular/common/http";
 })
 export class HomePage {
 
-  mediaArray : Observable<IMediaData[]>;
+  mediaArray : IMediaData[];
   apiUploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  constructor(private mediaProvider:MediaProvider) {
+  constructor(private media:MediaProvider) {
   }
 
   getAllCarpMedia () {
-      this.mediaProvider.getAllCarpMedia().subscribe( (res: IMediaData[]) => {
-        console.log(res);
+      this.media.getAllMedia().subscribe( res => {
         this.mediaArray = res;
-      });
+      })
   }
+
 
   ionViewDidLoad() {
     this.getAllCarpMedia();

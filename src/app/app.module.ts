@@ -11,7 +11,7 @@ import { TabsPageModule} from "../pages/tabs/tabs.module";
 import { LoginRegisterPageModule} from "../pages/login-register/login-register.module";
 import { ProfilePageModule} from "../pages/profile/profile.module";
 import { TabsPage} from "../pages/tabs/tabs";
-import {RequestARidePageModule} from "../pages/request-a-ride/request-a-ride.module";
+import { RequestARidePageModule } from "../pages/request-a-ride/request-a-ride.module";
 import { MediaProvider } from '../providers/media/media';
 
 @NgModule({

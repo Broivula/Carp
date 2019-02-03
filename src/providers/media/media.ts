@@ -17,7 +17,7 @@ export class MediaProvider {
 
   }
 
-  getAllCarpMedia (){
+  getAllMedia (){
     return this.http.get<IMediaData[]>(this.apiUrl + '/media');
   }
 
