@@ -26,10 +26,7 @@ export class HomePage {
   }
 
   getAllCarpMedia () {
-      this.mediaProvider.getAllCarpMedia().subscribe( res => {
-      console.log(res);
-      this.listOfAllMedia = res;
-    });
+      this.listOfAllMedia = this.mediaProvider.getAllCarpMedia();
   }
 
   ionViewDidLoad() {
