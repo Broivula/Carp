@@ -17,6 +17,7 @@
 <ion-content padding>
   <ion-tabs>
     <ion-tab [root]="home" tabTitle="home"></ion-tab>
+    <ion-tab [root]="upload" tabTitle="upload"></ion-tab>
     <ion-tab [root]="login_register" [show]="!mediaProvider.logged" tabTitle="login-register"></ion-tab>
     <ion-tab [root]="profile" [show]="mediaProvider.logged" tabTitle="profile"></ion-tab>
   </ion-tabs>

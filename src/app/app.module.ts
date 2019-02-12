@@ -11,6 +11,7 @@ import {ProfilePage} from '../pages/profile/profile';
 import {LoginRegisterPage} from '../pages/login-register/login-register';
 import {MenuPage} from '../pages/menu/menu';
 import {HttpClientModule} from '@angular/common/http';
+import {UploadPage} from '../pages/upload/upload';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     MenuPage,
     LoginRegisterPage,
     ProfilePage,
-
+    UploadPage,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +34,7 @@ import {HttpClientModule} from '@angular/common/http';
     MenuPage,
     LoginRegisterPage,
     ProfilePage,
+    UploadPage,
   ],
   providers: [
     StatusBar,
