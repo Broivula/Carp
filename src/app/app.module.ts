@@ -39,8 +39,7 @@ import { Chooser } from "@ionic-native/chooser";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MediaProvider,
-    Chooser
+    MediaProvider
   ]
 })
 export class AppModule {}

@@ -26,7 +26,8 @@ export class MediaProvider {
     const httpOptions = {
       headers: {
         'x-access-token': localStorage.getItem('token')
-      }
+      },
+      file: '../assets/imgs/rideplaceholder.png'
     };
     return this.http.post<Loginresponse>(this.apiUrl + '/media', data, httpOptions);
   }

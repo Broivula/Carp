@@ -1,8 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from "../../providers/media/media";
-import { File} from "@ionic/app-scripts";
-import { link } from "fs";
 
 
 /**
@@ -30,7 +28,7 @@ export class RequestARidePage {
   };
   place = '';
   show = false;
-  file = cordova.file.dataDirectory + rideplaceholder.png;
+  placeholder = '//assets/imgs/rideplaceholder.png';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public mediaProvider: MediaProvider) {
@@ -44,9 +42,9 @@ export class RequestARidePage {
     const formdata = new FormData();
     formdata.append('title', (this.departure + '-' + this.destination));
     formdata.append('description', this.description);
-    formdata.append('file', this.file);
+   // formdata.append('file', this.placeholder);
     this.place = (this.departure + '-' + this.destination);
-    console.log(this.file);
+    console.log(this.placeholder);
     console.log(this.place);
     console.log(this.formdata);
     this.mediaProvider.uploadRide(formdata).subscribe(resp => {
