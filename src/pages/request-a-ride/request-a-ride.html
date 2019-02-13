@@ -14,5 +14,32 @@
 
 
 <ion-content padding>
+  <form #formdata="ngForm" (ngSubmit)="upload()">
+    <ion-item>
+      <ion-label>Departure</ion-label>
+      <ion-input type="text" name="departure" placeholder="Departure city"
+                 [(ngModel)]="departure" minlength="3" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Destination</ion-label>
+      <ion-input type="text" name="destination" placeholder="Destination city"
+                 [(ngModel)]="destination" minlength="3" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Departure date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm"
+                    pickerFormat="DDDD MMMM YYYY HH:mm"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea name="description" placeholder="Available seats"
+                    minlength="5"></ion-textarea>
+    </ion-item>
+    <ion-buttons>
+      <button type="submit" ion-button>Make a ride</button>
+      <button type="button" ion-button (click)="this.login(this.user)">login test</button>
+    </ion-buttons>
+
+  </form>
 
 </ion-content>

@@ -22,3 +22,18 @@ export interface Thumbnail
   640?: string;
 }
 
+export interface User {
+  user_id?: number;
+  username: string;
+  password?: string;
+  email?: string;
+  date_created?: Date;
+  full_name?: string;
+}
+
+
+export interface Loginresponse {
+  massage: string;
+  token: string;
+  user: User;
+}

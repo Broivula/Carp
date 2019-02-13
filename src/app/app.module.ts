@@ -13,6 +13,7 @@ import { ProfilePageModule} from "../pages/profile/profile.module";
 import { TabsPage} from "../pages/tabs/tabs";
 import { RequestARidePageModule } from "../pages/request-a-ride/request-a-ride.module";
 import { MediaProvider } from '../providers/media/media';
+import { Chooser } from "@ionic-native/chooser";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MediaProvider } from '../providers/media/media';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MediaProvider
+    MediaProvider,
+    Chooser
   ]
 })
 export class AppModule {}

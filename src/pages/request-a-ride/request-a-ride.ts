@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MediaProvider } from "../../providers/media/media";
+import { File} from "@ionic/app-scripts";
+import { link } from "fs";
+
 
 /**
  * Generated class for the RequestARidePage page.
@@ -14,12 +18,48 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'request-a-ride.html',
 })
 export class RequestARidePage {
+  @ViewChild('formdata') formdata;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  departure = '';
+  destination = '';
+  description = '';
+  title = '';
+  user = {
+    'username': 'xdlsd',
+    'password': 'xdlsd'
+  };
+  place = '';
+  show = false;
+  file = cordova.file.dataDirectory + rideplaceholder.png;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public mediaProvider: MediaProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestARidePage');
   }
 
+  upload() {
+    const formdata = new FormData();
+    formdata.append('title', (this.departure + '-' + this.destination));
+    formdata.append('description', this.description);
+    formdata.append('file', this.file);
+    this.place = (this.departure + '-' + this.destination);
+    console.log(this.file);
+    console.log(this.place);
+    console.log(this.formdata);
+    this.mediaProvider.uploadRide(formdata).subscribe(resp => {
+      console.log(resp)
+    });
+  }
+
+  login() {
+    this.mediaProvider.login(this.user).subscribe(
+      response => {
+        console.log(response);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user_id', response.user.user_id.toString());
+      });
+  }
 }
