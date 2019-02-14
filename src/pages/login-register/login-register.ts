@@ -51,6 +51,7 @@ export class LoginRegisterPage {
       this.mediaProvider.token = response.token;
       this.mediaProvider.user = response.user;
       this.mediaProvider.logged = true;
+      this.mediaProvider.getProfilePic();
       // Reset form only if it exists
       if (!automatic) this.loginForm.reset();
       this.navCtrl.parent.select(0);

@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from "../../providers/media/media";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-
 /**
  * Generated class for the RequestARidePage page.
  *
@@ -19,26 +18,47 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RequestARidePage {
 
 
+
+
   @ViewChild('destination') destination:Input;
   public form: FormGroup;
 
-  show = false;
-  placeholder = '..//assets/imgs/rideplaceholder.png';
+  public show = false;
+
+  private pic: File;
+  placeholder = "../../assets/imgs/rideplaceholder.png";
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public mediaProvider: MediaProvider,
     private formbuilder: FormBuilder,
+
   ) {
+
     this.form = this.formbuilder.group({
-      file:[this.placeholder],
+      file:this.pic,
       title:['', Validators.required],
       description:['', Validators.required],
     })
   }
+
+  getFilePath () {
+
+  }
+
+  fileEvent (evt){
+    console.log(evt);
+    this.pic = evt['_value'];
+    console.log(this.pic);
+    this.form.value.file = this.pic;
+  }
+
   upload() {
 
+    this.mediaProvider.getFileById().subscribe( res => {
+      console.log(res);
+    });
     /*
     let formdata = new FormData();
     formdata.append('title', (this.departure + '-' + this.destination));
@@ -56,12 +76,9 @@ export class RequestARidePage {
     });
   }
 
-  login() {
-    this.mediaProvider.login(this.user).subscribe(
-      response => {
-        console.log(response);
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user_id', response.user.user_id.toString());
-      });
+
+  ionViewDidLoad () {
+
   }
+
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { HomePage} from "../home/home";
 import { LoginRegisterPage} from "../login-register/login-register";
 import { ProfilePage} from "../profile/profile";
+import { MediaProvider } from "../../providers/media/media";
 import { RequestARidePage} from "../request-a-ride/request-a-ride";
 
 /**
@@ -25,6 +26,6 @@ export class TabsPage {
   profileRoot = ProfilePage;
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public media: MediaProvider) {}
 
 }

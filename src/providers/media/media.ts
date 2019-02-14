@@ -17,8 +17,12 @@ export class MediaProvider {
   private apiUrl: string = 'http://media.mw.metropolia.fi/wbma';
   mediaAPI = "https://media.mw.metropolia.fi/wbma";
   user: User = null;
-  logged = false;
+  public logged = false;
   token;
+
+  cachedUserInfo = {
+    file_id: null,
+  };
 
   constructor(public http: HttpClient) {
 
@@ -28,11 +32,16 @@ export class MediaProvider {
     return this.http.get<IMediaData[]>(this.apiUrl + '/media');
   }
 
+  getFileById () {
+    return this.http.get<IMediaData>(this.apiUrl + '/media/' + this.cachedUserInfo.file_id)
+  }
+
   uploadRide(data) {
     console.log(data);
     const httpOptions = {
       headers: {
-        'x-access-token': localStorage.getItem('token')
+        'x-access-token': localStorage.getItem('token'),
+        'Content-type': 'application/json',
       }
     };
     console.log(httpOptions);
@@ -55,6 +64,31 @@ export class MediaProvider {
         }),
       };
       return this.http.post<UserCreated>(this.mediaAPI + '/users', user, httpOptions);
+    }
+
+    getFilesByTag(tag) {
+    //first have to request a list of files by tag 'profile'
+    //then take from there with our profile id
+    //bla bla lets try
+    return this.http.get(this.apiUrl + '/tags/' + tag)
+  }
+
+  getInformationOfCurrentUser (token) {
+    let httpsOptions = {
+      headers: {
+        "x-access-token": token
+      }
+    };
+    return this.http.get(this.apiUrl+ '/users/user', httpsOptions);
+  }
+
+    getProfilePic () {
+      this.getFilesByTag('profile').subscribe( (fileTagList: IMediaData[] )=> {
+        this.getInformationOfCurrentUser(this.token).subscribe( (userInfo: User)=> {
+          this.cachedUserInfo.file_id = fileTagList.filter(entry => entry.user_id == userInfo.user_id)[0].file_id;//.map(fileTagList => fileTagList.file_id);
+          console.log(this.cachedUserInfo);
+        })
+      })
     }
 
     checkToken()

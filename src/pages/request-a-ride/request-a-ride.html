@@ -15,6 +15,8 @@
 
 <ion-content padding>
   <form [formGroup]="form" (ngSubmit)="upload()">
+
+    <ion-input  type="file" (ionChange)="fileEvent($event)" formControlName="file">file</ion-input>
     <ion-item>
       <ion-label>Departure</ion-label>
       <ion-input type="text" name="departure" placeholder="Departure city" formControlName="title"
