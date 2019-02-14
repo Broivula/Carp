@@ -14,16 +14,16 @@
 
 
 <ion-content padding>
-  <form #formdata="ngForm" (ngSubmit)="upload()">
+  <form [formGroup]="form" (ngSubmit)="upload()">
     <ion-item>
       <ion-label>Departure</ion-label>
-      <ion-input type="text" name="departure" placeholder="Departure city"
-                 [(ngModel)]="departure" minlength="3" required></ion-input>
+      <ion-input type="text" name="departure" placeholder="Departure city" formControlName="title"
+                minlength="3" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Destination</ion-label>
-      <ion-input type="text" name="destination" placeholder="Destination city"
-                 [(ngModel)]="destination" minlength="3" required></ion-input>
+      <ion-input type="text" name="destination" placeholder="Destination city" #destination
+                minlength="3" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Departure date</ion-label>
@@ -32,12 +32,11 @@
     </ion-item>
     <ion-item>
       <ion-label>Description</ion-label>
-      <ion-textarea name="description" placeholder="Available seats"
+      <ion-textarea name="description" placeholder="Available seats" formControlName="description"
                     minlength="5"></ion-textarea>
     </ion-item>
     <ion-buttons>
       <button type="submit" ion-button>Make a ride</button>
-      <button type="button" ion-button (click)="this.login(this.user)">login test</button>
     </ion-buttons>
 
   </form>

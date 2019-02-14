@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from "../../providers/media/media";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 /**
@@ -16,38 +17,41 @@ import { MediaProvider } from "../../providers/media/media";
   templateUrl: 'request-a-ride.html',
 })
 export class RequestARidePage {
-  @ViewChild('formdata') formdata;
 
-  departure = '';
-  destination = '';
-  description = '';
-  title = '';
-  user = {
-    'username': 'xdlsd',
-    'password': 'xdlsd'
-  };
-  place = '';
+
+  @ViewChild('destination') destination:Input;
+  public form: FormGroup;
+
   show = false;
-  placeholder = '//assets/imgs/rideplaceholder.png';
+  placeholder = '..//assets/imgs/rideplaceholder.png';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public mediaProvider: MediaProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public mediaProvider: MediaProvider,
+    private formbuilder: FormBuilder,
+  ) {
+    this.form = this.formbuilder.group({
+      file:[this.placeholder],
+      title:['', Validators.required],
+      description:['', Validators.required],
+    })
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RequestARidePage');
-  }
-
   upload() {
-    const formdata = new FormData();
+
+    /*
+    let formdata = new FormData();
     formdata.append('title', (this.departure + '-' + this.destination));
     formdata.append('description', this.description);
-   // formdata.append('file', this.placeholder);
-    this.place = (this.departure + '-' + this.destination);
-    console.log(this.placeholder);
-    console.log(this.place);
-    console.log(this.formdata);
-    this.mediaProvider.uploadRide(formdata).subscribe(resp => {
+    formdata.append('file', this.placeholder);
+    */
+   //this.place = (this.departure + '-' + this.destination);
+   // console.log(this.placeholder);
+   // console.log(this.place);
+    this.form.value.title +='-'+this.destination['_value'];
+
+    console.log(this.form.value);
+    this.mediaProvider.uploadRide(this.form.value).subscribe(resp => {
       console.log(resp)
     });
   }
