@@ -25,36 +25,40 @@ export class MediaProvider {
   };
 
   constructor(public http: HttpClient) {
-
   }
 
   getAllMedia() {
-    return this.http.get<IMediaData[]>(this.apiUrl + '/media');
+    let httpOptions = {
+      headers: {
+        'Content-type': 'application/json',
+      }
+    };
+    return this.http.get<IMediaData[]>('/wbma/media', httpOptions);
   }
 
   getFileById () {
-    return this.http.get<IMediaData>(this.apiUrl + '/media/' + this.cachedUserInfo.file_id)
+    return this.http.get<IMediaData>('/wbma/media/' + this.cachedUserInfo.file_id)
   }
 
   uploadRide(data) {
     console.log(data);
-    const httpOptions = {
+    let httpOptions = {
       headers: {
         'x-access-token': localStorage.getItem('token'),
         'Content-type': 'application/json',
       }
     };
     console.log(httpOptions);
-    return this.http.post<Loginresponse>(this.apiUrl + '/media', data, httpOptions);
+    return this.http.post<Loginresponse>('/wbma/media', data, httpOptions);
   }
 
     login(user:User){
       const httpOptions = {
         headers: new HttpHeaders({
-          'Content-type': 'application/json',
+          'Content-type': 'application/json'
         }),
       };
-      return this.http.post<Login>(this.mediaAPI + '/login', user, httpOptions);
+      return this.http.post<Login>('/wbma/login', user, httpOptions);
     }
 
     register(user:User){
@@ -63,14 +67,11 @@ export class MediaProvider {
           'Content-type': 'application/json',
         }),
       };
-      return this.http.post<UserCreated>(this.mediaAPI + '/users', user, httpOptions);
+      return this.http.post<UserCreated>('/wbma/users', user, httpOptions);
     }
 
     getFilesByTag(tag) {
-    //first have to request a list of files by tag 'profile'
-    //then take from there with our profile id
-    //bla bla lets try
-    return this.http.get(this.apiUrl + '/tags/' + tag)
+    return this.http.get( '/wbma/tags/' + tag)
   }
 
   getInformationOfCurrentUser (token) {
@@ -79,7 +80,7 @@ export class MediaProvider {
         "x-access-token": token
       }
     };
-    return this.http.get(this.apiUrl+ '/users/user', httpsOptions);
+    return this.http.get('/wbma/users/user', httpsOptions);
   }
 
     getProfilePic () {
@@ -99,7 +100,7 @@ export class MediaProvider {
           'x-access-token': localStorage.getItem('token'),
         }),
       };
-      return this.http.get<User>(this.mediaAPI + 'users/user', httpOptions);
+      return this.http.get<User>('/wbma/users/user', httpOptions);
     }
 
     checkIfUserExist(user:User){
@@ -110,7 +111,7 @@ export class MediaProvider {
       };
       // return this.http.post<Loginresponse>(this.apiUrl + '/login', user, httpOptions);
 
-      return this.http.get(this.mediaAPI + '/users/username/' + user.username, httpOptions);
+      return this.http.get('/wbma/users/username/' + user.username, httpOptions);
     }
 
 }

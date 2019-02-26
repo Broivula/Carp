@@ -6,13 +6,6 @@ import { IMediaData } from "../../interfaces/interfaces";
 import { Observable } from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-home',

@@ -4,5 +4,11 @@
     "cordova": {}
   },
   "type": "ionic-angular",
+  "proxies":[
+    {
+      "path": "/wbma",
+      "proxyUrl":"http://media.mw.metropolia.fi/wbma"
+    }
+  ],
   "app_id": ""
 }
