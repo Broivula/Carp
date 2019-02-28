@@ -33,11 +33,11 @@ export class MediaProvider {
         'Content-type': 'application/json',
       }
     };
-    return this.http.get<IMediaData[]>('/wbma/media', httpOptions);
+    return this.http.get<IMediaData[]>(this.apiUrl + '/media', httpOptions);
   }
 
   getFileById () {
-    return this.http.get<IMediaData>('/wbma/media/' + this.cachedUserInfo.file_id)
+    return this.http.get<IMediaData>(this.apiUrl + '/media/' + this.cachedUserInfo.file_id)
   }
 
   uploadRide(data) {
@@ -45,11 +45,11 @@ export class MediaProvider {
     let httpOptions = {
       headers: {
         'x-access-token': localStorage.getItem('token'),
-        'Content-type': 'application/json',
+        'Content-type': 'application/json'
       }
     };
     console.log(httpOptions);
-    return this.http.post<Loginresponse>('/wbma/media', data, httpOptions);
+    return this.http.post<Loginresponse>(this.apiUrl + '/media', data, httpOptions);
   }
 
     login(user:User){
@@ -58,7 +58,7 @@ export class MediaProvider {
           'Content-type': 'application/json'
         }),
       };
-      return this.http.post<Login>('/wbma/login', user, httpOptions);
+      return this.http.post<Login>(this.apiUrl +'/login', user, httpOptions);
     }
 
     register(user:User){
@@ -67,11 +67,11 @@ export class MediaProvider {
           'Content-type': 'application/json',
         }),
       };
-      return this.http.post<UserCreated>('/wbma/users', user, httpOptions);
+      return this.http.post<UserCreated>(this.apiUrl + '/users', user, httpOptions);
     }
 
     getFilesByTag(tag) {
-    return this.http.get( '/wbma/tags/' + tag)
+    return this.http.get( this.apiUrl + '/tags/' + tag)
   }
 
   getInformationOfCurrentUser (token) {
@@ -80,7 +80,7 @@ export class MediaProvider {
         "x-access-token": token
       }
     };
-    return this.http.get('/wbma/users/user', httpsOptions);
+    return this.http.get(this.apiUrl + '/users/user', httpsOptions);
   }
 
     getProfilePic () {

@@ -16,7 +16,10 @@
 <ion-content padding>
   <form [formGroup]="form" (ngSubmit)="upload()">
 
-    <ion-input  type="file" (ionChange)="fileEvent($event)" formControlName="file">file</ion-input>
+    <ion-buttons>
+      <button type="button" ion-button block (click)="choosePic()">Choose a file</button>
+    </ion-buttons>
+
     <ion-item>
       <ion-label>Departure</ion-label>
       <ion-input type="text" name="departure" placeholder="Departure city" formControlName="title"
@@ -38,7 +41,7 @@
                     minlength="5"></ion-textarea>
     </ion-item>
     <ion-buttons>
-      <button type="submit" ion-button>Make a ride</button>
+      <button type="submit" *ngIf="chosen" ion-button>Make a ride</button>
     </ion-buttons>
 
   </form>

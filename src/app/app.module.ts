@@ -12,7 +12,7 @@ import { ProfilePageModule} from "../pages/profile/profile.module";
 import { TabsPage} from "../pages/tabs/tabs";
 import { RequestARidePageModule } from "../pages/request-a-ride/request-a-ride.module";
 import { MediaProvider } from '../providers/media/media';
-//import { Chooser } from "@ionic-native/chooser/";
+import { Chooser } from "@ionic-native/chooser/";
 import {StatusBar} from "@ionic-native/status-bar";
 import { File } from "@ionic-native/file/ngx";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
@@ -43,7 +43,8 @@ import { FileTransfer } from "@ionic-native/file-transfer/ngx";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MediaProvider,
     File,
-    FileTransfer
+    FileTransfer,
+    Chooser
   ]
 })
 export class AppModule {}
