@@ -1,0 +1,27 @@
+
+<ion-header>
+  <ion-navbar class="nav" color="primary">
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+<ion-toolbar>
+  <ion-searchbar></ion-searchbar>
+</ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let entry of mediaArray">
+      <ion-thumbnail slot="start">
+        <img [src]="apiUploadUrl + entry.filename">
+      </ion-thumbnail>
+      <div class="content">
+      <h2>{{entry.title}}</h2>
+      <p>{{entry.time_added | date:"dd/MM/yy"}}</p>
+      <p>{{entry.details}}</p><br>
+      <p>{{entry.description}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
