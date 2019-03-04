@@ -17,7 +17,7 @@
   <form [formGroup]="form" (ngSubmit)="upload()">
 
     <ion-buttons>
-      <button type="button" ion-button block (click)="choosePic()">Choose a file</button>
+     <ion-input type="file" accept="image" (change)="fileSelectHandler($event)" ></ion-input>
     </ion-buttons>
 
     <ion-item>
@@ -32,7 +32,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Departure date</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY HH:mm"
+      <ion-datetime #date displayFormat="MMM DD, YYYY HH:mm"
                     pickerFormat="DDDD MMMM YYYY HH:mm"></ion-datetime>
     </ion-item>
     <ion-item>
@@ -41,7 +41,7 @@
                     minlength="5"></ion-textarea>
     </ion-item>
     <ion-buttons>
-      <button type="submit" *ngIf="chosen" ion-button>Make a ride</button>
+      <button type="submit"  ion-button>Make a ride</button>
     </ion-buttons>
 
   </form>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IMediaData, Loginresponse, User } from "../../interfaces/interfaces";
+import {IFileUploadResponse, IMediaData, ITagMediaData, Loginresponse, User} from "../../interfaces/interfaces";
 
 import {Login, UserCreated} from '../../interface/media';
 
@@ -15,7 +15,6 @@ import {Login, UserCreated} from '../../interface/media';
 export class MediaProvider {
 
   private apiUrl: string = 'http://media.mw.metropolia.fi/wbma';
-  mediaAPI = "https://media.mw.metropolia.fi/wbma";
   user: User = null;
   public logged = false;
   token;
@@ -27,13 +26,13 @@ export class MediaProvider {
   constructor(public http: HttpClient) {
   }
 
-  getAllMedia() {
+  getAllCarpMedia() {
     let httpOptions = {
       headers: {
         'Content-type': 'application/json',
       }
     };
-    return this.http.get<IMediaData[]>(this.apiUrl + '/media', httpOptions);
+    return this.http.get<ITagMediaData[]>('/wbma/tags/carp', httpOptions);
   }
 
   getFileById () {
@@ -45,11 +44,22 @@ export class MediaProvider {
     let httpOptions = {
       headers: {
         'x-access-token': localStorage.getItem('token'),
-        'Content-type': 'application/json'
       }
+
     };
     console.log(httpOptions);
-    return this.http.post<Loginresponse>(this.apiUrl + '/media', data, httpOptions);
+    this.http.post( '/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
+      console.log(res);
+      let file_id = res.file_id;
+      //now tag the motherfucker so that we can get in CARP frontpage yo
+      let tag_data = {
+        'file_id':file_id,
+        'tag':'CARP'
+      };
+      this.http.post('/wbma/tags', tag_data, httpOptions).subscribe( res => {
+        console.log(res);
+      })
+    });
   }
 
     login(user:User){

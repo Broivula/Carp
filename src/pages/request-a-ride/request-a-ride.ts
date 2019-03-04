@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from "../../providers/media/media";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Chooser } from "@ionic-native/chooser";
+import {DateTimeData} from "ionic-angular/util/datetime-util";
 
 /**
  * Generated class for the RequestARidePage page.
@@ -22,13 +23,12 @@ export class RequestARidePage {
 
 
   @ViewChild('destination') destination:Input;
+  @ViewChild('date') date:DateTimeData;
   public form: FormGroup;
 
   public show = false;
 
   private file: File;
-  chosen = false;
-  fileBlob = new Blob;
   placeholder = '../assets/imgs/rideplaceholder.png';
 
   constructor(
@@ -47,31 +47,23 @@ export class RequestARidePage {
     })
   }
 
+  fileSelectHandler(evt){
+    console.log(evt);
+    this.file = evt.target.files[0];
+  }
+
   upload() {
 
-    // this.mediaProvider.getFileById().subscribe( res => {
-    //   console.log(res);
-    // });
+    let title = this.form.value.title +='-'+this.destination['_value'];
+    const fd= new FormData();
+    fd.append('file', this.file);
+    fd.append('title', title);
+    fd.append('description',  this.date['_text']);
 
-    this.form.value.title +='-'+this.destination['_value'];
-    this.form.value.file = this.fileBlob;
-    console.log(this.form.value.file);
-    console.log(this.form.value);
-    this.mediaProvider.uploadRide(this.form.value).subscribe(resp => {
-      console.log(resp)
-    });
+    this.mediaProvider.uploadRide(fd);
   }
 
-  choosePic() {
-    this.chooser.getFile('image/*')
-      .then(file => {
-        console.log(file ? file.name : 'canceled');
-        this.fileBlob = new Blob([file.data], { type: file.mediaType });
-        console.log(this.fileBlob);
-        this.chosen = true;
-      })
-      .catch((error: any) => console.error(error));
-  }
+
 
 
   ionViewDidLoad () {

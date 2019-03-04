@@ -15,6 +15,24 @@ export interface IMediaData {
   thumbnails?: Thumbnail;
 }
 
+export interface ITagMediaData{
+  "file_id": number,
+  "tag": string,
+  "filename": string,
+  "filesize":number,
+  "title": string,
+  "description"?: string,
+  "user_id": number,
+  "media_type": string,
+  "mime_type": string,
+  "time_added": string,
+}
+
+export interface IFileUploadResponse {
+  message: string,
+  file_id: number,
+}
+
 export interface Thumbnail
 {
   160?: string;
