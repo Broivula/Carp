@@ -1,8 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {IFileUploadResponse, IMediaData, ITagMediaData, Loginresponse, User} from "../../interfaces/interfaces";
+import {
+  IFileUploadResponse,
+  iListOfFavourites,
+  IMediaData,
+  ITagMediaData,
+  Loginresponse,
+  User
+} from "../../interfaces/interfaces";
 
 import {Login, UserCreated} from '../../interface/media';
+import {_catch} from "rxjs/operator/catch";
 
 
 /*
@@ -18,6 +26,7 @@ export class MediaProvider {
   user: User = null;
   public logged = false;
   token;
+  public bookedRides = [];
 
   cachedUserInfo = {
     file_id: null,
@@ -35,19 +44,18 @@ export class MediaProvider {
     return this.http.get<ITagMediaData[]>('/wbma/tags/carp', httpOptions);
   }
 
-  getFileById () {
-    return this.http.get<IMediaData>(this.apiUrl + '/media/' + this.cachedUserInfo.file_id)
+  getFileById (id) {
+    return this.http.get<IMediaData>('/wbma/media/' + id)
   }
 
   uploadRide(data) {
-    console.log(data);
+ //   console.log(data);
     let httpOptions = {
       headers: {
         'x-access-token': localStorage.getItem('token'),
-      }
+      }};
 
-    };
-    console.log(httpOptions);
+//    console.log(httpOptions);
     this.http.post( '/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
       console.log(res);
       let file_id = res.file_id;
@@ -60,6 +68,64 @@ export class MediaProvider {
         console.log(res);
       })
     });
+  }
+
+  updateRideInfo(desc, id) {
+    let httpsOptions = {
+      headers: {
+        "x-access-token": localStorage.getItem('token'),
+      }
+    };
+    let data = {
+      description:desc
+    };
+
+    return this.http.put('/wbma/media/' + id, data, httpsOptions);
+  }
+
+  deleteRide (id){
+    let httpsOptions = {
+      headers: {
+        "x-access-token": localStorage.getItem('token'),
+      }
+    };
+    return this.http.delete('/wbma/media/' + id, httpsOptions)
+  }
+
+
+  getUserInfo(id){
+    let httpsOptions = {
+      headers: {
+        "x-access-token": localStorage.getItem('token'),
+      }
+    };
+    return this.http.get<User>('/wbma/users/' + id, httpsOptions);
+  }
+
+  bookARide(id){
+    let httpsOptions = {
+      headers: {
+        "x-access-token": localStorage.getItem('token'),
+      }
+    };
+    let data = {
+      file_id:id,
+    };
+    return this.http.post('/wbma/favourites', data, httpsOptions);
+  }
+
+  getBookedRidesByUser () {
+    let httpsOptions = {
+      headers: {
+        "x-access-token": localStorage.getItem('token'),
+      }
+    };
+
+    return this.http.get<iListOfFavourites[]>('/wbma/favourites', httpsOptions)
+  }
+
+  getBookedRidesByFile(id){
+    return this.http.get<iListOfFavourites[]>('/wbma/favourites/file/' + id)
   }
 
     login(user:User){
@@ -84,26 +150,32 @@ export class MediaProvider {
     return this.http.get( this.apiUrl + '/tags/' + tag)
   }
 
-  getInformationOfCurrentUser (token) {
+  getInformationOfCurrentUser () {
     let httpsOptions = {
       headers: {
-        "x-access-token": token
+        "x-access-token": localStorage.getItem('token')
       }
     };
-    return this.http.get(this.apiUrl + '/users/user', httpsOptions);
+    return this.http.get<User>(this.apiUrl + '/users/user', httpsOptions);
   }
 
     getProfilePic () {
-      this.getFilesByTag('profile').subscribe( (fileTagList: IMediaData[] )=> {
-        this.getInformationOfCurrentUser(this.token).subscribe( (userInfo: User)=> {
-          this.cachedUserInfo.file_id = fileTagList.filter(entry => entry.user_id == userInfo.user_id)[0].file_id;//.map(fileTagList => fileTagList.file_id);
-          console.log(this.cachedUserInfo);
-        })
+    return new Promise( (resolve, reject) => {
+    this.getFilesByTag('profile').subscribe( (fileList:ITagMediaData[]) => {
+      this.getInformationOfCurrentUser().subscribe( (userInfo: User) => {
+        fileList.map( entry => {if(entry.user_id === userInfo.user_id){
+          this.cachedUserInfo.file_id = entry.file_id;
+          this.getFileById(entry.file_id).subscribe(res => {
+            resolve(res)
+          })
+        }})
       })
-    }
+    })
+  })
+  }
 
-    checkToken()
-    {
+
+    checkToken(){
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -122,6 +194,12 @@ export class MediaProvider {
       // return this.http.post<Loginresponse>(this.apiUrl + '/login', user, httpOptions);
 
       return this.http.get('/wbma/users/username/' + user.username, httpOptions);
+    }
+
+
+
+    markLogged () {
+      this.logged = !!localStorage.getItem('token');
     }
 
 }

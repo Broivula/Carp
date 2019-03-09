@@ -24,6 +24,7 @@ export class RequestARidePage {
 
   @ViewChild('destination') destination:Input;
   @ViewChild('date') date:DateTimeData;
+  @ViewChild('seats')seats:Input;
   public form: FormGroup;
 
   public show = false;
@@ -36,7 +37,7 @@ export class RequestARidePage {
     public navParams: NavParams,
     public mediaProvider: MediaProvider,
     private formbuilder: FormBuilder,
-    public chooser: Chooser
+    public chooser: Chooser,
 
   ) {
 
@@ -54,13 +55,16 @@ export class RequestARidePage {
 
   upload() {
 
+    let seats = this.seats['_value'];
     let title = this.form.value.title +='-'+this.destination['_value'];
+    let desc = '/' + seats + '*' + this.date['_text'] + '*' + this.form.value.description;
     const fd= new FormData();
     fd.append('file', this.file);
     fd.append('title', title);
-    fd.append('description',  this.date['_text']);
+    fd.append('description',  desc);
 
     this.mediaProvider.uploadRide(fd);
+    this.navCtrl.parent.select(0);
   }
 
 

@@ -13,6 +13,9 @@ export interface IMediaData {
   time_added: string;
   screenshot?: string;
   thumbnails?: Thumbnail;
+  seats?:number,
+  parsedDesc?:string,
+  date?:string,
 }
 
 export interface ITagMediaData{
@@ -35,9 +38,9 @@ export interface IFileUploadResponse {
 
 export interface Thumbnail
 {
-  160?: string;
-  320?: string;
-  640?: string;
+  w160?: string;
+  w320?: string;
+  w640?: string;
 }
 
 export interface User {
@@ -54,4 +57,10 @@ export interface Loginresponse {
   massage: string;
   token: string;
   user: User;
+}
+
+export interface iListOfFavourites {
+  favourite_id?: number,
+  file_id?: number,
+  user_id?: number,
 }

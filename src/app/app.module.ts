@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {IonicApp, IonicErrorHandler, IonicModule,} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule} from "@angular/common/http";
 
@@ -16,10 +16,13 @@ import { Chooser } from "@ionic-native/chooser/";
 import {StatusBar} from "@ionic-native/status-bar";
 import { File } from "@ionic-native/file/ngx";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { RidePage } from "../pages/ride/ride";
+import { HomePage } from "../pages/home/home";
 
 @NgModule({
   declarations: [
     MyApp,
+    RidePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -35,6 +38,7 @@ import { FileTransfer } from "@ionic-native/file-transfer/ngx";
   entryComponents: [
     MyApp,
     TabsPage,
+    RidePage,
 
   ],
   providers: [
@@ -43,8 +47,7 @@ import { FileTransfer } from "@ionic-native/file-transfer/ngx";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MediaProvider,
     File,
-    FileTransfer,
-    Chooser
+    Chooser,
   ]
 })
 export class AppModule {}

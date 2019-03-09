@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, Tabs} from 'ionic-angular';
 import { HomePage} from "../home/home";
 import { LoginRegisterPage} from "../login-register/login-register";
 import { ProfilePage} from "../profile/profile";
@@ -20,6 +20,7 @@ import { RequestARidePage} from "../request-a-ride/request-a-ride";
 })
 export class TabsPage {
 
+
   homeRoot = HomePage;
   requestARideRoot = RequestARidePage;
   loginRegisterRoot = LoginRegisterPage;
@@ -27,5 +28,6 @@ export class TabsPage {
 
 
   constructor(public navCtrl: NavController, public media: MediaProvider) {}
+
 
 }

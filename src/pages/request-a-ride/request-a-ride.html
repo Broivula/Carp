@@ -36,8 +36,12 @@
                     pickerFormat="DDDD MMMM YYYY HH:mm"></ion-datetime>
     </ion-item>
     <ion-item>
+      <ion-label>Seats available</ion-label>
+      <ion-input type="number" name="seats" placeholder="1" #seats required></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label>Description</ion-label>
-      <ion-textarea name="description" placeholder="Available seats" formControlName="description"
+      <ion-textarea name="description" placeholder="Extra info about the ride" formControlName="description"
                     minlength="5"></ion-textarea>
     </ion-item>
     <ion-buttons>

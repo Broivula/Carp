@@ -17,5 +17,29 @@
 
 
 <ion-content padding>
+  <!-- NOTES! So, the user_info holds all of the user -related data for profile page (email etc.)
+-->
+  <ion-item #mainContent>
+    <div item-start class="userInfo" >
+      <img *ngIf="profile_pic" src="{{apiUploadUrl}}{{profile_pic.thumbnails.w160}}">
+      <ion-item>
+        <h2>{{user_info.username}}</h2>
+      </ion-item>
+    </div>
+
+    <div item-end class="rideInfo" >
+      <h2>Booked Rides</h2>
+      <ion-list>
+        <ion-card *ngFor="let entry of booked_rides" tappable="true" (click)="pushToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})">
+          <ion-card-title>
+            {{entry.title}}
+          </ion-card-title>
+          <ion-card-content>
+            <p>{{entry.time_added|date:"dd/MM/yy"}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </div>
+  </ion-item>
 
 </ion-content>

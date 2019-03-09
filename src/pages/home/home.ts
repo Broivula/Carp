@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise'
 import {IMediaData, ITagMediaData} from "../../interfaces/interfaces";
 import { Observable } from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {RidePage} from "../ride/ride";
 
 @IonicPage()
 @Component({
@@ -16,19 +17,35 @@ export class HomePage {
   mediaArray : ITagMediaData[];
   apiUploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  constructor(private media:MediaProvider) {
+  constructor(
+    private media:MediaProvider,
+    private navCtrl: NavController
+    ) {
   }
 
-  getAllCarpMedia () {
+  fetchAllCarpMedia () {
+    if(this.mediaArray) this.mediaArray.length = 0;
+
       this.media.getAllCarpMedia().subscribe( res => {
         console.log(res);
         this.mediaArray = res;
       })
   }
 
+  changeToRidePage(params?){
+    params.parentPage = this;
+    this.navCtrl.push(RidePage, params);
+  }
+
+  getAllCarpMedia (){
+    return this.mediaArray;
+  }
+
+
 
   ionViewDidLoad() {
-    this.getAllCarpMedia();
+    this.fetchAllCarpMedia();
+    this.media.markLogged();
   }
 
 }

@@ -46,12 +46,11 @@ export class LoginRegisterPage {
   login(automatic = false): void {
     console.log('logging in:', this.user.username);
     this.mediaProvider.login(this.user).subscribe((response: Login) => {
-      console.log(response.user);
+      console.log(response);
       localStorage.setItem('token', response.token);
       this.mediaProvider.token = response.token;
       this.mediaProvider.user = response.user;
       this.mediaProvider.logged = true;
-      this.mediaProvider.getProfilePic();
       // Reset form only if it exists
       if (!automatic) this.loginForm.reset();
       this.navCtrl.parent.select(0);
@@ -60,6 +59,7 @@ export class LoginRegisterPage {
       this.showAlert(error.statusText);
     });
   }
+
   checkPasswordMatch(): void {
     if (this.user.password !== this.confirmPassword) {
       this.registerForm.form.controls['confirmPassword'].setErrors({ 'incorrect': true });
@@ -93,4 +93,5 @@ export class LoginRegisterPage {
         }
       });
   }
+
 }
