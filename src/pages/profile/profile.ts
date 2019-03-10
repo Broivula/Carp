@@ -5,6 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
 import {iListOfFavourites, IMediaData, ITagMediaData, User} from "../../interfaces/interfaces";
 import { RidePage } from "../ride/ride";
+import {SettingsPage} from "../settings/settings";
 
 
 /**
@@ -64,12 +65,21 @@ export class ProfilePage {
     })
   }
 
+
+
   pushToRidePage(params?){
     params.parentPage = this;
     this.navCtrl.push(RidePage, params);
   }
 
+  pushToSettingsPage(){
+    this.navCtrl.push(SettingsPage)
+  }
+
   logout() {
+
+    this.booked_rides.length = 0;
+    this.user_info = {};
     localStorage.clear();
     this.mediaProvider.logged = false;
     //   this.navCtrl.push(HomePage);

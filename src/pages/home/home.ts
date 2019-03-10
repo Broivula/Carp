@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import { MediaProvider} from "../../providers/media/media";
 import 'rxjs/add/operator/toPromise'
 import {IMediaData, ITagMediaData} from "../../interfaces/interfaces";
@@ -19,7 +19,8 @@ export class HomePage {
 
   constructor(
     private media:MediaProvider,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertCtrl: AlertController
     ) {
   }
 
@@ -28,20 +29,39 @@ export class HomePage {
 
       this.media.getAllCarpMedia().subscribe( res => {
         console.log(res);
+        res.map(entry => this.parseDesc(entry.description, entry));
         this.mediaArray = res;
       })
   }
 
   changeToRidePage(params?){
-    params.parentPage = this;
-    this.navCtrl.push(RidePage, params);
+
+    if(!localStorage.getItem('token')){
+      let alert = this.alertCtrl.create({
+        title: 'Create a free account!',
+        message: 'Login or create an account to see the available rides',
+        buttons: [
+          {text: 'Signup/Login',
+          }]
+      });
+      alert.present();
+      alert.onDidDismiss(() =>{this.navCtrl.parent.select(3);});
+    }else{
+      params.parentPage = this;
+      this.navCtrl.push(RidePage, params);
+    }
   }
 
   getAllCarpMedia (){
     return this.mediaArray;
   }
 
-
+  parseDesc (text, parent){
+    let textArr = text.trim().split('*');
+    parent.seats = textArr[0];
+    parent.date = textArr[1];
+    parent.parsedDesc = textArr[2];
+  }
 
   ionViewDidLoad() {
     this.fetchAllCarpMedia();

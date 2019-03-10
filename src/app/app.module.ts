@@ -17,12 +17,13 @@ import {StatusBar} from "@ionic-native/status-bar";
 import { File } from "@ionic-native/file/ngx";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
 import { RidePage } from "../pages/ride/ride";
-import { HomePage } from "../pages/home/home";
+import { SettingsPage } from "../pages/settings/settings";
 
 @NgModule({
   declarations: [
     MyApp,
-    RidePage
+    RidePage,
+    SettingsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -39,7 +40,7 @@ import { HomePage } from "../pages/home/home";
     MyApp,
     TabsPage,
     RidePage,
-
+    SettingsPage,
   ],
   providers: [
     StatusBar,

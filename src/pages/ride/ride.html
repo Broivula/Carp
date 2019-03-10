@@ -14,7 +14,7 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-item>
+    <ion-item *ngIf="isOwner">
     <button item-end ion-button color="danger" (click)="deleteRide()"> <ion-icon name="trash"></ion-icon> </button>
     </ion-item>
     <ion-card-header>

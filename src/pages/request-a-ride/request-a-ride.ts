@@ -1,9 +1,9 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from "../../providers/media/media";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Chooser } from "@ionic-native/chooser";
-import {DateTimeData} from "ionic-angular/util/datetime-util";
+import { DateTimeData } from "ionic-angular/util/datetime-util";
 
 /**
  * Generated class for the RequestARidePage page.
@@ -52,6 +52,7 @@ export class RequestARidePage {
     console.log(evt);
     this.file = evt.target.files[0];
   }
+
 
   upload() {
 

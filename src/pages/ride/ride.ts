@@ -22,6 +22,7 @@ export class RidePage {
   userBookedRides = <iListOfFavourites[]>[];
   isThisBooked = false;
   amountBooked = 0;
+  isOwner = false;
 
 
   constructor(
@@ -35,16 +36,17 @@ export class RidePage {
     let file_id = this.navParams.get('file_id');
     let uploader_id = this.navParams.get('uploader_id');
 
+
      new Promise((resolve, reject) => {
       this.data.getFileById(file_id).subscribe( (res:IMediaData) => {
         this.rideInfo = res;
         this.parseDesc(this.rideInfo.description);
-        console.log(this.rideInfo);
+      //  console.log(this.rideInfo);
         resolve();
       });
     }).then( () => {
       this.data.getUserInfo(uploader_id).subscribe( (res:User) => {
-        console.log(res);
+     //   console.log(res);
         this.rideUploaderInfo = res;
       });
     }).then(()=>{
@@ -53,13 +55,19 @@ export class RidePage {
         this.userBookedRides.map(entry =>{ if(entry.file_id === this.rideInfo.file_id){
           this.isThisBooked = true;
         }});
-        console.log(res);
+      //  console.log(res);
       })
     }).then(() => {
       this.data.getBookedRidesByFile(this.rideInfo.file_id).subscribe( res => {
         this.amountBooked = res.length;
       })
      });
+
+    //check if the user is the owner of the file
+    if(localStorage.getItem('user_id') == uploader_id.toString()){
+
+      this.isOwner = true;
+    }
 
   }
 

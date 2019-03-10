@@ -20,10 +20,9 @@ import { RequestARidePage} from "../request-a-ride/request-a-ride";
 })
 export class TabsPage {
 
-
+  loginRegisterRoot = LoginRegisterPage;
   homeRoot = HomePage;
   requestARideRoot = RequestARidePage;
-  loginRegisterRoot = LoginRegisterPage;
   profileRoot = ProfilePage;
 
 

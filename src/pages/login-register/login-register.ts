@@ -50,6 +50,7 @@ export class LoginRegisterPage {
       localStorage.setItem('token', response.token);
       this.mediaProvider.token = response.token;
       this.mediaProvider.user = response.user;
+      localStorage.setItem('user_id', response.user.user_id.toString());
       this.mediaProvider.logged = true;
       // Reset form only if it exists
       if (!automatic) this.loginForm.reset();
