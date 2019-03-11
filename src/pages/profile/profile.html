@@ -1,16 +1,10 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
     <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button ion-button (click)="logout()">
-        Logout &nbsp;<ion-icon color="primary" name="log-out"></ion-icon></button>
+        Logout &nbsp;<ion-icon name="log-out"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -18,7 +12,6 @@
 
 <ion-content padding>
   <!-- NOTES! So, the user_info holds all of the user -related data for profile page (email etc.)
-
     <div item-start class="userInfo" >
       <ion-thumbnail slot="start" *ngIf="profile_pic">
         <img  src="{{apiUploadUrl}}{{profile_pic.thumbnails.w160}}">
@@ -29,11 +22,8 @@
         <h2 item-end>{{user_info.username}}</h2>
       </ion-item>
       </ion-item>
-
     </div>
-
     <div item-end class="rideInfo" >
-
       <ion-list>
         <ion-card *ngFor="let entry of booked_rides" tappable="true" (click)="pushToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})">
           <ion-card-title>
@@ -47,33 +37,33 @@
     </div>-->
 
 
-  <ion-list>
-    <ion-item color="none" id="profile-list-item8" style="background-color: floralwhite; border-radius: 5px; border: solid #639C67 2px; ">
-      <ion-thumbnail item-left  *ngIf="profile_pic">
-        <img  src="{{apiUploadUrl}}{{profile_pic.thumbnails.w160}}">
+  <ion-list class="user-card">
+    <ion-item color="none" id="profile-list-item8" >
+      <ion-thumbnail item-left  >
+        <img *ngIf="mediaProvider.profile_pic"  src="{{apiUploadUrl}}{{mediaProvider.profile_pic.thumbnails.w160}}">
+        <img *ngIf="!mediaProvider.profile_pic" src="../../assets/imgs/rideplaceholder.png">
       </ion-thumbnail>
-      <h2>
-        {{user_info.username}}
-      </h2>
+      <button class="setting" ion-button [large]="true" (click)="pushToSettingsPage()"><ion-icon name="settings"></ion-icon></button>
+      <h1>
+        {{mediaProvider.user_info.username}}
+      </h1>
       <p >
-        {{user_info.email}}
+        {{mediaProvider.user_info.email}}
       </p>
     </ion-item>
 
-    <ion-item  style="background-color: floralwhite; border-radius: 5px; border: solid #639C67 2px; ">
-      <div *ngIf="profile_pic == null">
-        <h4 style="white-space: normal">
-         Looks like you haven't uploaded a profile picture yet!
-        </h4>
-        <button ion-button item-end (click)="pushToSettingsPage()">Upload one now!</button>
-      </div>
+    <ion-item *ngIf="mediaProvider.profile_pic == null">
+      <h4 style="white-space: normal">
+        Looks like you haven't uploaded a profile picture yet!
+      </h4>
+      <button ion-button item-end (click)="pushToSettingsPage()">Upload one now!</button>
     </ion-item>
 
   </ion-list>
-  <ion-list *ngIf="booked_rides.length > 0" no-lines="true" inset="true" style="border: solid #639C67 2px; border-radius: 5px; background-color: floralwhite;">
 
-   <ion-label margin-top="30%" text-center>Booked Rides</ion-label>
-    <ion-item inset="true" style="margin-top: 5px; border: solid #BCEBCB 2px;background-color:  #BCEBCB; border-radius: 2px" *ngFor="let entry of booked_rides" tappable="true" (click)="pushToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})">
+  <ion-list class="booked-rides" *ngIf="mediaProvider.booked_rides.length > 0" no-lines="true" >
+    <ion-label text-center><ion-icon name="book"></ion-icon> Booked Rides</ion-label>
+    <ion-item  *ngFor="let entry of mediaProvider.booked_rides" tappable="true" (click)="pushToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})">
       <h2 item-start>
         {{entry.title}}
       </h2>
@@ -82,6 +72,5 @@
       </p>
     </ion-item>
   </ion-list>
-  <button ion-button (click)="pushToSettingsPage()"><ion-icon name="settings"></ion-icon> Settings</button>
 
 </ion-content>

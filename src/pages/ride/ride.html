@@ -21,10 +21,10 @@
       <ion-item>
       <ion-card-title item-start>{{rideInfo.title}}</ion-card-title>
       <ion-card-title item-end>{{amountBooked}}{{rideInfo.seats}}</ion-card-title>
-        <p>{{rideInfo.date}}</p>
       </ion-item>
       <ion-thumbnail >
         <img *ngIf="rideInfo.thumbnails" [src]="apiUploadUrl + rideInfo.thumbnails.w320">
+        <p>{{rideInfo.date}}</p>
       </ion-thumbnail>
       <ion-item>
       <h2 item-start><ion-icon name="person"></ion-icon> {{rideUploaderInfo.username}}</h2>

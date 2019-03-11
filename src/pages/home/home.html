@@ -1,4 +1,6 @@
 
+executable file 56 lines (48 sloc) 1.71 KB
+
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Carp</ion-title>
@@ -8,48 +10,47 @@
 
 
 <ion-content padding>
-<!--
-  <ion-list>
-    <ion-item *ngFor="let entry of mediaArray">
-
-      <h2>{{entry.title}}</h2>
-      <p>{{entry.time_added | date:"dd/MM/yy"}}</p>
-      <p>{{entry.details}}</p><br>
-      <button ion-button color="primary" item-end [large]="true" (click)="changeToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})" >Open ride!</button>
-    </ion-item>
-  </ion-list>
-  -->
-
-<ion-list>
-  <ion-card id="home-card21" *ngFor="let entry of mediaArray">
+  <!--
     <ion-list>
-      <ion-item color="none" id="home-list-item20">
-        <ion-thumbnail item-left>
-          <img [src]="apiUploadUrl + entry.filename">
-        </ion-thumbnail>
-        <h2>
-         {{entry.title}}
-        </h2>
-        <p>
-          {{entry.time_added | date:"dd/MM/yy"}}
-        </p>
+      <ion-item *ngFor="let entry of mediaArray">
+        <h2>{{entry.title}}</h2>
+        <p>{{entry.time_added | date:"dd/MM/yy"}}</p>
+        <p>{{entry.details}}</p><br>
+        <button ion-button color="primary" item-end [large]="true" (click)="changeToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})" >Open ride!</button>
       </ion-item>
-      <ion-item id="home-list-item-container3">
-        <div id="home-markdown3" style="text-align:center;white-space: normal;text-overflow: ellipsis" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-          {{entry.parsedDesc}}
-          </p>
-        </div>
-      </ion-item>
-      <ion-item color="assertive" id="home-list-item19">
-        Driver Rating:
-        <ion-icon  name="star" item-right></ion-icon>
-      </ion-item>
-      <button id="home-button2" ion-button color="positive" block [large]="true" (click)="changeToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})">
-        Book now!
-      </button>
     </ion-list>
-  </ion-card>
-</ion-list>
+    -->
+
+  <ion-list>
+    <ion-card id="home-card21" *ngFor="let entry of mediaArray">
+      <ion-list>
+        <ion-item class="information" color="none" id="home-list-item20">
+          <ion-thumbnail item-left>
+            <img [src]="apiUploadUrl + entry.filename">
+          </ion-thumbnail>
+          <h2>
+            {{entry.title}}
+          </h2>
+          <p>
+            {{entry.time_added | date:"dd/MM/yy"}}
+          </p>
+        </ion-item>
+        <ion-item class="description" id="home-list-item-container3">
+          <div id="home-markdown3" style="text-align:center;white-space: normal;text-overflow: ellipsis" class="show-list-numbers-and-dots">
+            <p style="margin-top:0px;color:#000000;">
+              {{entry.parsedDesc}}
+            </p>
+          </div>
+        </ion-item>
+        <ion-item class="rate" color="assertive" id="home-list-item19">
+          Driver Rating:
+          <ion-icon  name="star" item-right></ion-icon>
+        </ion-item>
+        <button ion-button icon-left id="home-button2" ion-button outline color="positive" (click)="changeToRidePage({file_id:entry.file_id, uploader_id:entry.user_id})">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>Book now!
+        </button>
+      </ion-list>
+    </ion-card>
+  </ion-list>
 
 </ion-content>

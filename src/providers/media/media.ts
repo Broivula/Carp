@@ -23,6 +23,9 @@ import {_catch} from "rxjs/operator/catch";
 export class MediaProvider {
 
   private apiUrl: string = 'http://media.mw.metropolia.fi/wbma';
+  profile_pic = null;
+  user_info = {};
+  booked_rides = [];
   user: User = null;
   public logged = false;
   token;
@@ -174,6 +177,34 @@ export class MediaProvider {
   })
   }
 
+
+  getUserRelevantData(){
+    this.getProfilePic().then( res => {
+      this.profile_pic = res;
+    });
+
+    new Promise((resolve, reject) => {
+      this.getInformationOfCurrentUser().subscribe( (res:User) => {
+        this.user_info = res;
+        resolve();
+      })
+    }).then( () => {
+      //now get the rides that the user has booked.
+      this.getBookedRidesByUser().subscribe( (unfilteredFiles:iListOfFavourites[]) => {
+        unfilteredFiles.map(entry => {
+          this.getFileById(entry.file_id).subscribe((file_data:IMediaData) => {
+            this.getFilesByTag('CARP').subscribe((res:ITagMediaData[]) =>{
+              res.map(e => {
+                if(e.file_id === entry.file_id){
+                  this.booked_rides.push(e);
+                }
+              })
+            })
+          })
+        });
+      })
+    })
+  }
 
     checkToken(){
       const httpOptions = {

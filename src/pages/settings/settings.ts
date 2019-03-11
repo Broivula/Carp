@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Chooser } from "@ionic-native/chooser";
 import { MediaProvider } from "../../providers/media/media";
+import { FileChooser } from "@ionic-native/file-chooser/ngx";
 
 /**
  * Generated class for the SettingsPage page.
@@ -25,8 +25,8 @@ export class SettingsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private formbuilder: FormBuilder,
-    private chooser: Chooser,
-    private mediaProvider: MediaProvider
+    private mediaProvider: MediaProvider,
+    private chooser: FileChooser,
     ) {
     this.form = this.formbuilder.group({
       file: Blob,
@@ -38,6 +38,10 @@ export class SettingsPage {
 
   updateFileSelectHandler(event){
   this.file = event.target.files[0];
+  }
+
+  selectAFile(){
+    this.chooser.open().then(uri =>{ console.log(uri)}).catch(e => {console.log(e)})
   }
 
   upload() {

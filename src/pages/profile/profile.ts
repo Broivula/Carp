@@ -37,7 +37,7 @@ export class ProfilePage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() {/*
     this.mediaProvider.getProfilePic().then( res => {
       this.profile_pic = res;
     });
@@ -62,7 +62,7 @@ export class ProfilePage {
           })
         });
       })
-    })
+    })*/
   }
 
 
@@ -78,8 +78,9 @@ export class ProfilePage {
 
   logout() {
 
-    this.booked_rides.length = 0;
-    this.user_info = {};
+    this.mediaProvider.booked_rides.length = 0;
+    this.mediaProvider.user_info = {};
+    this.mediaProvider.profile_pic = null;
     localStorage.clear();
     this.mediaProvider.logged = false;
     //   this.navCtrl.push(HomePage);

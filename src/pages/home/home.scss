@@ -1,8 +1,21 @@
 page-home {
 
-  #home-markdown3{
 
+  ion-card{
+    border: 1px solid color($colors, secondary);
+    border-radius: 5px;
+    .information{
+      ion-thumbnail > img {
+        border: 1px hidden #639C67;
+        border-radius: 5px;
+      }
+    }
+    button{
+      float: right;
+    }
   }
+
+}
 /*
   ion-searchbar input {
     border-radius: 5px !important;
@@ -47,4 +60,4 @@ page-home {
       flex-direction: column;
     }
   }*/
-}
+
