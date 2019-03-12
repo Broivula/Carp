@@ -1,0 +1,80 @@
+page-request-a-ride {
+
+  input::-ms-input-placeholder {
+    text-align: center;
+  }
+
+  input::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  textarea::-ms-input-placeholder {
+    text-align: center;
+    padding: 6px;
+  }
+
+  textarea::-webkit-input-placeholder {
+    text-align: center;
+    padding: 6px;
+  }
+
+  .item-input .label-md {
+    color: color($colors, primary);
+  }
+
+  .item-datetime .label-md {
+    color: color($colors, primary);
+
+  }
+
+  .text-input-md {
+    margin: 0;
+  }
+
+  ion-input, ion-textarea, ion-datetime {
+    border: 1px solid color($colors, secondary);
+    border-radius: 5px;
+    padding: 2px;
+  }
+
+  .scroll-content {
+    padding-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  form {
+    overflow-y: scroll;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px;
+    border: solid #639C67 2px;
+    padding-top: 5px;
+  }
+
+  ion-buttons {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .item-md {
+    padding-left: 8px;
+  }
+
+  .item-inner {
+    padding: 0;
+    border: 0 !important;
+  }
+
+  .button-block-md {
+    margin: 13px 0;
+  }
+  .submit {
+    float: right;
+    margin-right: 0;
+  }
+
+
+}

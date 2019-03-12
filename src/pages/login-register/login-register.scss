@@ -1,0 +1,73 @@
+page-login-register {
+  input::-ms-input-placeholder {
+    text-align: center;
+  }
+
+  input::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  .scroll-content {
+    padding-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  form {
+    overflow-y: scroll;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px 5px 0 0;
+    border: 2px solid color($colors, primary);
+    border-bottom: 0;
+  }
+
+  .item-inner {
+    border: 0 !important;
+  }
+
+  ion-label { // input label
+    font-size: 1.7rem !important;
+  }
+
+  ion-input, ion-textarea {
+    border: 1px solid color($colors, secondary);
+    border-radius: 5px;
+    padding: 4px;
+  }
+
+  .submit {
+    float: right;
+    margin-right: 8px;
+  }
+
+  .transfer { // transfer to login or register
+    padding: 0;
+    border: 2px solid color($colors, primary);
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+
+    .label-md { // for android
+      margin-top: 0;
+    }
+
+    .label-ios { // for ios
+      margin-top: 0;
+    }
+
+    .change {
+      border-top: 1px solid color($colors, secondary);
+      background-color: transparent;
+      display: block;
+      margin: 0 auto;
+      color: grey;
+    }
+  }
+
+
+  .button-block-md {
+    margin-top: 20px;
+  }
+}

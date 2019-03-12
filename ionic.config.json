@@ -1,0 +1,13 @@
+{
+  "name": "Carp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/wbma",
+      "proxyUrl": "http://media.mw.metropolia.fi/wbma"
+    }
+  ]
+}

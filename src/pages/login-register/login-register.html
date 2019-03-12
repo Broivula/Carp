@@ -1,0 +1,109 @@
+<!--
+  Generated template for the LoginRegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="!showRegister">Login</ion-title>
+    <ion-title *ngIf="showRegister">Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #lf="ngForm" *ngIf="!showRegister" (ngSubmit)="login()" novalidate>
+   <!--
+    <ion-item no-lines>
+      <ion-label>
+        Login
+      </ion-label>
+    </ion-item>
+    -->
+    <ion-item>
+      <ion-label color="primary" stacked>Username</ion-label>
+      <ion-input name="username"
+                 placeholder="username input"
+                 [(ngModel)]="user.username"
+                 #username="ngModel"
+                 required minlength="3">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Password</ion-label>
+      <ion-input name="password" type="password" placeholder="password input"
+                 [(ngModel)]="user.password" required>
+      </ion-input>
+    </ion-item>
+    <!-- Button activated when form is valid -->
+    <button class="submit" type="submit" outline ion-button icon-left [disabled]="lf.invalid"><ion-icon name="arrow-forward"></ion-icon>Login</button>
+  </form>
+
+  <form #rf="ngForm" *ngIf="showRegister" (ngSubmit)="register()" novalidate>
+   <!--
+    <ion-item no-lines>
+      <ion-label>
+        Register
+      </ion-label>
+    </ion-item>
+    -->
+    <ion-item>
+      <ion-label *ngIf="userAlert" color="danger" stacked>User exists!</ion-label>
+      <ion-label color="primary" stacked>Username</ion-label>
+      <ion-input #username (ionBlur)="checkUserExists()"
+                 name="username" [(ngModel)]="user.username" placeholder="username input"
+                 required minlength="3">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Email</ion-label>
+      <ion-input type="email"
+                 name="email" [(ngModel)]="user.email" placeholder="email input"
+                 required pattern="^[a-zA-Z0-9._]+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Full name</ion-label>
+      <ion-input name="full_name" [(ngModel)]="user.full_name"
+                 placeholder="full name input" minlength="4"
+                 pattern="^[a-z ,.'-]+">
+      </ion-input>
+    </ion-item>
+    <!--
+    <ion-item>
+      <ion-label color="primary" stacked>Auto model</ion-label>
+      <ion-input name="full_name" [(ngModel)]="user.auto_model"
+                 placeholder="auto model input" minlength="4"
+                 pattern="^[a-z ,.'-]+">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Plate number</ion-label>
+      <ion-input name="full_name" [(ngModel)]="user.plate_number"
+                 placeholder="plate number input" minlength="4"
+                 pattern="^[a-z ,.'-]+">
+      </ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label color="primary" stacked>Password</ion-label>
+      <ion-input name="password" [(ngModel)]="user.password"
+                 type="password" placeholder="password input, minimum 5 letters."
+                 required minlength="5">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>Confirm Password</ion-label>
+      <ion-input name="confirmPassword" [(ngModel)]="confirmPassword"
+                 type="password" placeholder="confirm password"
+                 required minlength="5" (ionChange)="checkPasswordMatch()">
+      </ion-input>
+    </ion-item>
+    <button class="submit" type="submit" ion-button icon-left outline [disabled]="rf.invalid"><ion-icon name="arrow-forward"></ion-icon> Register</button>
+  </form>
+
+  <ion-item class="transfer">
+    <button class="change" *ngIf="!showRegister" (click)="swapLoginRegisterForms()">No user account yet? Create one >></button>
+    <button class="change" *ngIf="showRegister" (click)="swapLoginRegisterForms()">Already a user? Login >></button>
+  </ion-item>
+
+</ion-content>
