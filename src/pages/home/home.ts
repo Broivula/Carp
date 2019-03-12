@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider} from "../../providers/media/media";
-import 'rxjs/add/operator/toPromise'
-import {IMediaData, ITagMediaData} from "../../interfaces/interfaces";
-import { Observable } from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {RidePage} from "../ride/ride";
+import { ITagMediaData } from "../../interfaces/interfaces";
+import { RidePage } from "../ride/ride";
 
 @IonicPage()
 @Component({

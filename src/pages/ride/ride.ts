@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {MediaProvider} from "../../providers/media/media";
-import {iListOfFavourites, IMediaData, User} from "../../interfaces/interfaces";
+import { MediaProvider } from "../../providers/media/media";
+import { iListOfFavourites, IMediaData, User } from "../../interfaces/interfaces";
+import { ViewProfilePage } from "../view-profile/view-profile";
 
-/**
- * Generated class for the RidePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -69,6 +64,10 @@ export class RidePage {
       this.isOwner = true;
     }
 
+  }
+
+  viewProfile(){
+    this.navCtrl.push(ViewProfilePage, {user_id:this.rideUploaderInfo.user_id})
   }
 
   bookARide () {

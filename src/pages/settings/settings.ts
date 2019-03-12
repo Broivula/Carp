@@ -3,8 +3,7 @@ import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angula
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MediaProvider } from "../../providers/media/media";
 import { FileChooser } from "@ionic-native/file-chooser/ngx";
-import {error} from "util";
-import {UserExists} from "../../interface/media";
+import { UserExists }  from "../../interface/media";
 
 /**
  * Generated class for the SettingsPage page.
@@ -42,10 +41,6 @@ export class SettingsPage {
 
   updateFileSelectHandler(event){
   this.file = event.target.files[0];
-  }
-
-  selectAFile(){
-    this.chooser.open().then(uri =>{ console.log(uri)}).catch(e => {console.log(e)})
   }
 
   validationCheck(){
@@ -111,7 +106,16 @@ export class SettingsPage {
         this.presentAnAlert({title:'Error', message:'something went wrong updating the data..'})
       })
     })
+  }
 
+  uploadProfilePic(){
+    const fd= new FormData();
+    fd.append('file', this.file);
+    fd.append('title', 'profile_pic');
+    fd.append('description',  'user_profile_pic');
+
+    this.mediaProvider.uploadNewProfilePic(fd);
+    this.navCtrl.pop();
   }
 
   emailValidator(email){

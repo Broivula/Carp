@@ -10,15 +10,7 @@ import {
 } from "../../interfaces/interfaces";
 
 import {Login, UserCreated} from '../../interface/media';
-import {_catch} from "rxjs/operator/catch";
 
-
-/*
-  Generated class for the MediaProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class MediaProvider {
 
@@ -44,11 +36,11 @@ export class MediaProvider {
         'Content-type': 'application/json',
       }
     };
-    return this.http.get<ITagMediaData[]>('/wbma/tags/carp', httpOptions);
+    return this.http.get<ITagMediaData[]>('http://media.mw.metropolia.fi/wbma/tags/carp', httpOptions);
   }
 
   getFileById (id) {
-    return this.http.get<IMediaData>('/wbma/media/' + id)
+    return this.http.get<IMediaData>('http://media.mw.metropolia.fi/wbma/media/' + id)
   }
 
   uploadRide(data) {
@@ -59,19 +51,54 @@ export class MediaProvider {
       }};
 
 //    console.log(httpOptions);
-    this.http.post( '/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
+    this.http.post( 'http://media.mw.metropolia.fi/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
       console.log(res);
       let file_id = res.file_id;
-      //now tag the motherfucker so that we can get in CARP frontpage yo
       let tag_data = {
         'file_id':file_id,
         'tag':'CARP'
       };
-      this.http.post('/wbma/tags', tag_data, httpOptions).subscribe( res => {
+      this.http.post('http://media.mw.metropolia.fi/wbma/tags', tag_data, httpOptions).subscribe( res => {
         console.log(res);
       })
     });
   }
+
+  uploadNewProfilePic(data){
+    let httpOptions = {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      }};
+
+    this.http.post( 'http://media.mw.metropolia.fi/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
+      console.log(res);
+      let file_id = res.file_id;
+      let tag_data = {
+        'file_id':file_id,
+        'tag':'profile'
+      };
+      this.http.post('http://media.mw.metropolia.fi/wbma/tags', tag_data, httpOptions).subscribe( res => {
+        console.log('profile pic uploaded succesfully!');
+        this.getProfilePic().then( res => {
+          this.profile_pic = res;
+        });
+      })
+    });
+  }
+
+  getCommentsById(id){
+    return this.http.get('http://media.mw.metropolia.fi/wbma/comments/file/' + id);
+  }
+
+  postAComment(data){
+    let httpOptions = {
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+      }};
+
+    return this.http.post('http://media.mw.metropolia.fi/wbma/comments', data, httpOptions);
+  }
+
 
   updateRideInfo(desc, id) {
     let httpsOptions = {
@@ -83,7 +110,7 @@ export class MediaProvider {
       description:desc
     };
 
-    return this.http.put('/wbma/media/' + id, data, httpsOptions);
+    return this.http.put('http://media.mw.metropolia.fi/wbma/media/' + id, data, httpsOptions);
   }
 
   deleteRide (id){
@@ -92,7 +119,7 @@ export class MediaProvider {
         "x-access-token": localStorage.getItem('token'),
       }
     };
-    return this.http.delete('/wbma/media/' + id, httpsOptions)
+    return this.http.delete('http://media.mw.metropolia.fi/wbma/media/' + id, httpsOptions)
   }
 
 
@@ -102,7 +129,7 @@ export class MediaProvider {
         "x-access-token": localStorage.getItem('token'),
       }
     };
-    return this.http.get<User>('/wbma/users/' + id, httpsOptions);
+    return this.http.get<User>('http://media.mw.metropolia.fi/wbma/users/' + id, httpsOptions);
   }
 
   updateUserInfo(data){
@@ -113,7 +140,7 @@ export class MediaProvider {
     };
 
     console.log(data);
-    return this.http.put('/wbma/users', data, httpsOptions);
+    return this.http.put('http://media.mw.metropolia.fi/wbma/users', data, httpsOptions);
   }
 
   bookARide(id){
@@ -125,7 +152,7 @@ export class MediaProvider {
     let data = {
       file_id:id,
     };
-    return this.http.post('/wbma/favourites', data, httpsOptions);
+    return this.http.post('http://media.mw.metropolia.fi/wbma/favourites', data, httpsOptions);
   }
 
   getBookedRidesByUser () {
@@ -135,11 +162,11 @@ export class MediaProvider {
       }
     };
 
-    return this.http.get<iListOfFavourites[]>('/wbma/favourites', httpsOptions)
+    return this.http.get<iListOfFavourites[]>('http://media.mw.metropolia.fi/wbma/favourites', httpsOptions)
   }
 
   getBookedRidesByFile(id){
-    return this.http.get<iListOfFavourites[]>('/wbma/favourites/file/' + id)
+    return this.http.get<iListOfFavourites[]>('http://media.mw.metropolia.fi/wbma/favourites/file/' + id)
   }
 
     login(user:User){
@@ -217,6 +244,24 @@ export class MediaProvider {
     })
   }
 
+  getViewProfilePic(id){
+
+    return new Promise((resolve, reject) => {
+      this.getFilesByTag('profile').subscribe((res:ITagMediaData[]) => {
+        res.map(entry => {
+          if(entry.user_id === id){
+            this.getFileById(id).subscribe((res:IMediaData) => {
+              resolve(res);
+            })
+          }
+        })
+      })
+    }).catch(e=>{
+      console.log('something went wrong with fetching the users profile picture data : ' + e)
+    })
+
+  }
+
     checkToken(){
       const httpOptions = {
         headers: new HttpHeaders({
@@ -224,7 +269,7 @@ export class MediaProvider {
           'x-access-token': localStorage.getItem('token'),
         }),
       };
-      return this.http.get<User>('/wbma/users/user', httpOptions);
+      return this.http.get<User>('http://media.mw.metropolia.fi/wbma/users/user', httpOptions);
     }
 
     checkIfUserExist(username){
@@ -235,7 +280,7 @@ export class MediaProvider {
       };
       // return this.http.post<Loginresponse>(this.apiUrl + '/login', user, httpOptions);
 
-      return this.http.get('/wbma/users/username/' + username, httpOptions);
+      return this.http.get('http://media.mw.metropolia.fi/wbma/users/username/' + username, httpOptions);
     }
 
 

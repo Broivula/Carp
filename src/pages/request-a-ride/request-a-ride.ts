@@ -4,12 +4,6 @@ import { MediaProvider } from "../../providers/media/media";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DateTimeData } from "ionic-angular/util/datetime-util";
 
-/**
- * Generated class for the RequestARidePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

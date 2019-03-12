@@ -16,12 +16,15 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { RidePage } from "../pages/ride/ride";
 import { SettingsPage } from "../pages/settings/settings";
 import { FileChooser } from "@ionic-native/file-chooser/ngx";
+import { ViewProfilePage } from "../pages/view-profile/view-profile";
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
   declarations: [
     MyApp,
     RidePage,
-    SettingsPage
+    SettingsPage,
+    ViewProfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -32,6 +35,7 @@ import { FileChooser } from "@ionic-native/file-chooser/ngx";
     LoginRegisterPageModule,
     ProfilePageModule,
     RequestARidePageModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,6 +43,7 @@ import { FileChooser } from "@ionic-native/file-chooser/ngx";
     TabsPage,
     RidePage,
     SettingsPage,
+    ViewProfilePage,
   ],
   providers: [
     StatusBar,

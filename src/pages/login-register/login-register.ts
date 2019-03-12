@@ -1,10 +1,10 @@
 
-import { IonicPage} from 'ionic-angular';
-import {Component, ViewChild} from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
-import {NgForm} from '@angular/forms';
-import {Login, User, UserCreated, UserExists} from '../../interface/media';
-import {MediaProvider} from '../../providers/media/media';
+import { IonicPage } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { NgForm } from '@angular/forms';
+import { Login, User, UserCreated, UserExists } from '../../interface/media';
+import { MediaProvider } from '../../providers/media/media';
 
 
 @IonicPage()

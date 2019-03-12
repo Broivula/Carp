@@ -21,32 +21,37 @@
       <ion-label stacked>
         Username
       </ion-label>
-      <ion-input type="text" placeholder="enter your full name" formControlName="username"></ion-input>
+      <ion-input type="text" placeholder="new username" formControlName="username"></ion-input>
     </ion-item>
 
     <ion-item id="loginRegister-input6">
       <ion-label stacked>
         Email
       </ion-label>
-      <ion-input type="text" placeholder="email" formControlName="email"></ion-input>
+      <ion-input type="text" placeholder="new email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item id="loginRegister-input8">
       <ion-label stacked>
         Password
       </ion-label>
-      <ion-input type="text" placeholder="password" formControlName="password"></ion-input>
+      <ion-input type="text" placeholder="new password" formControlName="password"></ion-input>
     </ion-item>
     <ion-item id="loginRegister-input9">
       <ion-label stacked>
         Repeat password
       </ion-label>
-      <ion-input type="text" placeholder="type in your password again" #repeatPassword></ion-input>
+      <ion-input type="text" placeholder="repeat the new password" #repeatPassword></ion-input>
     </ion-item>
-      <ion-input type="file" accept="image" (change)="updateFileSelectHandler($event)" ></ion-input>
   </form>
   <button id="loginRegister-button1" ion-button color="primary" (click)="validationCheck()" block style="border-radius:16px 16px 16px 16px;">
-    Update given information!
+    Update given information
   </button>
+
+  <ion-input type="file" accept="image" (change)="updateFileSelectHandler($event)" ></ion-input>
+  <button  ion-button color="primary" (click)="uploadProfilePic()"  style="border-radius:16px 16px 16px 16px;">
+    Upload profile picture
+  </button>
+
 
 </ion-content>

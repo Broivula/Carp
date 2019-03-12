@@ -3,9 +3,8 @@ import { IonicPage } from 'ionic-angular';
 
 import { NavController, NavParams } from 'ionic-angular';
 import { MediaProvider } from '../../providers/media/media';
-import {iListOfFavourites, IMediaData, ITagMediaData, User} from "../../interfaces/interfaces";
 import { RidePage } from "../ride/ride";
-import {SettingsPage} from "../settings/settings";
+import { SettingsPage } from "../settings/settings";
 
 
 /**
