@@ -57,7 +57,6 @@ export class ViewProfilePage {
   ionViewDidLoad() {
     let user_id = this.navParams.get('user_id');
 
-
    this.mediaProvider.getViewProfilePic(user_id).then((res:IMediaData) =>{
      this.userProfilePic = res;
      console.log(this.userProfilePic);

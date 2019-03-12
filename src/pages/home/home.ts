@@ -25,7 +25,6 @@ export class HomePage {
     if(this.mediaArray) this.mediaArray.length = 0;
 
       this.media.getAllCarpMedia().subscribe( res => {
-        console.log(res);
         res.map(entry => this.parseDesc(entry.description, entry));
         this.mediaArray = res;
       })

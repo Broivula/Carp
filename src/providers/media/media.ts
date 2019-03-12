@@ -52,14 +52,12 @@ export class MediaProvider {
 
 //    console.log(httpOptions);
     this.http.post( 'http://media.mw.metropolia.fi/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
-      console.log(res);
       let file_id = res.file_id;
       let tag_data = {
         'file_id':file_id,
         'tag':'CARP'
       };
       this.http.post('http://media.mw.metropolia.fi/wbma/tags', tag_data, httpOptions).subscribe( res => {
-        console.log(res);
       })
     });
   }
@@ -71,7 +69,6 @@ export class MediaProvider {
       }};
 
     this.http.post( 'http://media.mw.metropolia.fi/wbma/media',data, httpOptions).subscribe( (res:IFileUploadResponse) => {
-      console.log(res);
       let file_id = res.file_id;
       let tag_data = {
         'file_id':file_id,
@@ -245,12 +242,11 @@ export class MediaProvider {
   }
 
   getViewProfilePic(id){
-
     return new Promise((resolve, reject) => {
       this.getFilesByTag('profile').subscribe((res:ITagMediaData[]) => {
         res.map(entry => {
           if(entry.user_id === id){
-            this.getFileById(id).subscribe((res:IMediaData) => {
+            this.getFileById(entry.file_id).subscribe((res:IMediaData) => {
               resolve(res);
             })
           }

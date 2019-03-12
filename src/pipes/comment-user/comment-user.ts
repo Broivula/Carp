@@ -19,7 +19,6 @@ export class CommentUserPipe implements PipeTransform {
   transform(id) {
     return new Promise((resolve, reject) => {
         this.mediaProvider.getUserInfo(id).subscribe( (res:User) =>{
-          console.log('resolving username: ' + res.username);
           resolve(res.username)
         })
     })

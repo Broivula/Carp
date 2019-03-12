@@ -50,10 +50,11 @@
       <ion-input type="text" placeholder="leave a comment as a rating!" #commentInput></ion-input>
     </ion-item>
 
-  <button ion-button style="float: right;" (click)="postAComment()">Comment!</button>
+  <button *ngIf="!userProfilePic" ion-button [disabled]="true" style="float: right;" (click)="postAComment()">Comment!</button>
+  <button *ngIf="userProfilePic" ion-button style="float: right;" (click)="postAComment()">Comment!</button>
 
   <ion-item>
-    <h2>reviews</h2>
+    <h2 text-center ><i>reviews</i></h2>
     <ion-list>
       <ion-item *ngFor="let comment of comments">
         <ion-item no-lines="true">
