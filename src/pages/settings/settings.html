@@ -15,7 +15,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="form" >
+  <form [formGroup]="form">
     <ion-label stacked text-center="true" style="font-size: large; margin: 3px;">Update User Info</ion-label>
     <ion-item>
       <ion-label stacked>
@@ -45,7 +45,7 @@
     </ion-item>
       <ion-input type="file" accept="image" (change)="updateFileSelectHandler($event)" ></ion-input>
   </form>
-  <button id="loginRegister-button1" ion-button color="primary" block style="border-radius:16px 16px 16px 16px;">
+  <button id="loginRegister-button1" ion-button color="primary" (click)="validationCheck()" block style="border-radius:16px 16px 16px 16px;">
     Update given information!
   </button>
 

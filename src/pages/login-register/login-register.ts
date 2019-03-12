@@ -46,7 +46,7 @@ export class LoginRegisterPage {
   login(automatic = false): void {
     console.log('logging in:', this.user.username);
     this.mediaProvider.login(this.user).subscribe((response: Login) => {
-      console.log(response);
+    //  console.log(response);
       localStorage.setItem('token', response.token);
       this.mediaProvider.token = response.token;
       this.mediaProvider.user = response.user;
@@ -82,7 +82,7 @@ export class LoginRegisterPage {
   }
 
   checkUserExists(): void {
-    this.mediaProvider.checkIfUserExist(this.user).
+    this.mediaProvider.checkIfUserExist(this.user.username).
       subscribe((response: UserExists) => {
         console.log('username free:', response.available);
         if (!response.available) {

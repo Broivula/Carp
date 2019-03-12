@@ -105,6 +105,17 @@ export class MediaProvider {
     return this.http.get<User>('/wbma/users/' + id, httpsOptions);
   }
 
+  updateUserInfo(data){
+    let httpsOptions = {
+      headers: {
+        "x-access-token": localStorage.getItem('token'),
+      }
+    };
+
+    console.log(data);
+    return this.http.put('/wbma/users', data, httpsOptions);
+  }
+
   bookARide(id){
     let httpsOptions = {
       headers: {
@@ -216,7 +227,7 @@ export class MediaProvider {
       return this.http.get<User>('/wbma/users/user', httpOptions);
     }
 
-    checkIfUserExist(user:User){
+    checkIfUserExist(username){
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-type': 'application/json'
@@ -224,7 +235,7 @@ export class MediaProvider {
       };
       // return this.http.post<Loginresponse>(this.apiUrl + '/login', user, httpOptions);
 
-      return this.http.get('/wbma/users/username/' + user.username, httpOptions);
+      return this.http.get('/wbma/users/username/' + username, httpOptions);
     }
 
 

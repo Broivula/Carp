@@ -66,6 +66,7 @@ export class HomePage {
   ionViewDidLoad() {
     this.fetchAllCarpMedia();
     this.media.markLogged();
+    this.media.getUserRelevantData();
   }
 
 }
