@@ -3,6 +3,10 @@ executable file 56 lines (48 sloc) 1.71 KB
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Carp</ion-title>
+
+    <button ion-button style="float: right; border-radius: 3px;" (click)="searchFunction()" ><ion-icon name="search"></ion-icon></button>
+    <ion-input type="text" style="border-radius: 5px; background-color: floralwhite; width: 50%; float: right; padding-right: 10px;" #searchBar></ion-input>
+
   </ion-navbar>
 
 </ion-header>
@@ -50,5 +54,11 @@ executable file 56 lines (48 sloc) 1.71 KB
       </ion-list>
     </ion-card>
   </ion-list>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown">
+    </ion-refresher-content>
+  </ion-refresher>
 
 </ion-content>

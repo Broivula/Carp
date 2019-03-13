@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MediaProvider} from "../../providers/media/media";
 import { ITagMediaData } from "../../interfaces/interfaces";
@@ -11,6 +11,7 @@ import { RidePage } from "../ride/ride";
 })
 export class HomePage {
 
+  @ViewChild('searchBar')searchBar:Input;
   mediaArray : ITagMediaData[];
   apiUploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -28,6 +29,18 @@ export class HomePage {
         res.map(entry => this.parseDesc(entry.description, entry));
         this.mediaArray = res;
       })
+  }
+
+  refreshData(event){
+    try{
+      if(this.mediaArray.length > 0){this.mediaArray.length = 0}
+
+      this.fetchAllCarpMedia();
+      event.complete();
+    }catch (e) {
+      event.complete();
+      console.log('something went wrong with refreshing: ' + e.toString())
+    }
   }
 
   changeToRidePage(params?){
@@ -50,6 +63,24 @@ export class HomePage {
 
   getAllCarpMedia (){
     return this.mediaArray;
+  }
+
+  searchFunction(){
+    if(this.mediaArray.length > 0){this.mediaArray.length = 0;}
+    let tempSearchTerm = this.searchBar['_value'];
+    if(tempSearchTerm.toString().length > 2) {
+      let sT = tempSearchTerm.toString().trim().toLowerCase();
+      this.media.getAllCarpMedia().subscribe(res =>{
+        res.map(entry =>{
+          let eT = entry.title.toLowerCase().trim();
+          if(eT.includes(sT) || sT.includes(eT)){
+            this.mediaArray.push(entry);
+          }
+
+        })
+      })
+    }
+
   }
 
   parseDesc (text, parent){
