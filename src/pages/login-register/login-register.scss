@@ -16,10 +16,16 @@ page-login-register {
   }
 
   form {
-
     overflow-y: scroll;
     box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px 5px 0 0;
+    border: 2px solid color($colors, primary);
+    border-bottom: 0;
+  }
 
+  .item-inner {
+    border: 0 !important;
   }
 
   ion-label { // input label
@@ -32,21 +38,34 @@ page-login-register {
     padding: 4px;
   }
 
-  .item-block.item-md {
-    min-height: 10px;
+  .submit {
+    float: right;
+    margin-right: 8px;
+  }
+
+  .transfer { // transfer to login or register
     padding: 0;
+    border: 2px solid color($colors, primary);
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
 
-    .item-inner { // transfer to login or register
-      border-bottom: 0;
-      padding: 0;
+    .label-md { // for android
+      margin-top: 0;
+    }
 
-      .change {
-        background-color: transparent;
-        display: block;
-        margin: 0 auto
-      }
+    .label-ios { // for ios
+      margin-top: 0;
+    }
+
+    .change {
+      border-top: 1px solid color($colors, secondary);
+      background-color: transparent;
+      display: block;
+      margin: 0 auto;
+      color: grey;
     }
   }
+
 
   .button-block-md {
     margin-top: 20px;

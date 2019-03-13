@@ -6,12 +6,12 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>viewProfile</ion-title>
+    <ion-title>Profile of {{profilePageInfo.username}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-item color="none" id="profile-list-item8" >
+    <ion-item color="none" id="profile-list-item8" style="border-radius: 5px;" >
       <ion-thumbnail item-left  >
         <img *ngIf="userProfilePic"  src="{{apiUploadUrl}}{{userProfilePic.thumbnails.w160}}">
         <img *ngIf="!userProfilePic" src="../../assets/imgs/rideplaceholder.png">
@@ -46,14 +46,14 @@
   </ion-slides>
 
     -->
-    <ion-item>
+    <ion-item no-lines="true" style="border-radius: 5px;">
       <ion-input type="text" placeholder="leave a comment as a rating!" #commentInput></ion-input>
     </ion-item>
 
   <button *ngIf="!userProfilePic" ion-button [disabled]="true" style="float: right;" (click)="postAComment()">Comment!</button>
   <button *ngIf="userProfilePic" ion-button style="float: right;" (click)="postAComment()">Comment!</button>
 
-  <ion-item>
+  <ion-item style="border-radius: 5px;">
     <h2 text-center ><i>reviews</i></h2>
     <ion-list>
       <ion-item *ngFor="let comment of comments">

@@ -30,11 +30,13 @@ page-request-a-ride {
   .text-input-md {
     margin: 0;
   }
-  ion-input, ion-textarea ,ion-datetime{
+
+  ion-input, ion-textarea, ion-datetime {
     border: 1px solid color($colors, secondary);
     border-radius: 5px;
     padding: 2px;
   }
+
   .scroll-content {
     padding-bottom: 0 !important;
     display: flex;
@@ -52,23 +54,27 @@ page-request-a-ride {
     padding-top: 5px;
   }
 
-  .item-md {
-    padding-left: 5px;
-    padding-right: 5px;
+  ion-buttons {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
 
+  .item-md {
+    padding-left: 8px;
   }
-  .item-md.item-block .item-inner {
+
+  .item-inner {
     padding: 0;
-    border: 0;
+    border: 0 !important;
   }
+
   .button-block-md {
     margin: 13px 0;
   }
+  .submit {
+    float: right;
+    margin-right: 0;
+  }
 
-  .desc {
-    padding-bottom: 10px;
-  }
-  .makeRide {
-    padding-left: 30%
-  }
+
 }

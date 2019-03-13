@@ -1,3 +1,31 @@
 page-settings {
+  input::-ms-input-placeholder {
+    text-align: center;
+  }
 
+  input::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  form {
+    overflow-y: scroll;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px;
+    border: solid #639C67 2px;
+    padding-top: 5px;
+
+    ion-label {
+      font-size: 18px !important;
+      color: #639C67 !important;
+    }
+
+    ion-item {
+      padding: 0 16px !important;
+    }
+
+    .last {
+      margin-bottom: 4px;
+    }
+  }
 }
